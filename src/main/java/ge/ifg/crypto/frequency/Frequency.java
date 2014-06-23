@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class Frequency extends TestCases {
 
-	private static HashMap<String, Integer> frequency;
+	private HashMap<String, Integer> frequency;
 
 	public double getFrequency(String str) {
 		Integer freq = frequency.get(str);
