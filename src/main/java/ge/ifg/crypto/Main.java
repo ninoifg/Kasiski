@@ -14,7 +14,15 @@ public class Main {
 
 		KasiskiWorker kasiski = new KasiskiWorker(file);
 		kasiski.analize();
-
+		int [][] a = kasiski.buildTable();
+		
+		for (int[] cs : a) {
+			for (int c : cs) {
+				System.out.print(c);
+			}
+			System.out.println();
+		}
+		
 	}
 
 }
