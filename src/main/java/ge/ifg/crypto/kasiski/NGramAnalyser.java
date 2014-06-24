@@ -1,9 +1,11 @@
 package ge.ifg.crypto.kasiski;
 
+import ge.ifg.crypto.utils.GeneralNGram;
 import ge.ifg.crypto.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -42,11 +44,18 @@ public class NGramAnalyser {
 	}
 
 	public void removeUnused() {
+
+		List<String> remove = new ArrayList<>();
+
 		for (Entry<String, List<Integer>> entry : map.entrySet()) {
 			List<Integer> list = entry.getValue();
 			if (list.size() < 2) {
-				map.remove(entry.getKey());
+				remove.add(entry.getKey());
 			}
+		}
+
+		for (String rm : remove) {
+			map.remove(rm);
 		}
 	}
 
@@ -66,19 +75,37 @@ public class NGramAnalyser {
 		return (int) map.entrySet().stream().filter(entry -> entry.getValue().size() > 1).count();
 	}
 
-	private int analizeGCD() {
+	private int analizeGCD(List<Integer> list) {
+		int gcd = 0;
+
+		Iterator<Integer> iterator = list.iterator();
+
+		int prev = iterator.next();
+		int next;
+
+		while (iterator.hasNext()) {
+			next = iterator.next();
+			gcd = Utils.GCD(next - prev, gcd);
+		}
+
+		return gcd;
+	}
+
+	public void analyzeGCD(KeyLengthAnalyser analyser) {
 		int gcd = 0;
 		for (Entry<String, List<Integer>> entry : map.entrySet()) {
 			List<Integer> list = entry.getValue();
 			if (list.size() > 1) {
-				System.out.println(entry.getKey() + " " + entry.getValue());
+				gcd = analizeGCD(list);
+				if (gcd > 3) {
+					analyser.add(new GeneralNGram(N, gcd, list.size()));
+				}
 			}
 		}
-		return gcd;
 	}
 
-	public int getGCD() {
-
-		return getGCD();
+	@Override
+	public String toString() {
+		return map.toString();
 	}
 }
