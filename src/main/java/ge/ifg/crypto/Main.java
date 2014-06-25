@@ -16,13 +16,20 @@ public class Main {
 		kasiski.analize();
 		int [][] a = kasiski.buildTable();
 		
-		for (int[] cs : a) {
-			for (int c : cs) {
-				System.out.print(c);
-			}
-			System.out.println();
-		}
+		int sum =0;
 		
+//		for (int[] cs : a) {
+//			int sm = 0;
+//			for (int c : cs) {
+//				sm+=c;
+//				System.out.print(c);
+//				System.out.print(" ");
+//			}
+//			sum += sm;
+//			System.out.println(sm);
+//		}
+
+		System.out.println(kasiski.findKey());
 	}
 
 }

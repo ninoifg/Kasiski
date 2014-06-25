@@ -11,6 +11,10 @@ public class KasiskiWorker {
 
 	private String text = null;
 
+	private String key = null;
+
+	private String additionalKey = null;
+	
 	private KeyLengthAnalyser analyser = new KeyLengthAnalyser();
 
 	private int keyLength;
@@ -48,10 +52,39 @@ public class KasiskiWorker {
 	}
 
 	public int[][] buildTable() {
-		table = new int[33][5];
+		table = new int[keyLength][33];
 		for (int i = 0; i < text.length(); i++) {
-
+			table[i % keyLength][text.charAt(i)-'ა']++;
 		}
 		return table;
 	}
+	
+	public String findKey() {
+		
+		StringBuilder key = new StringBuilder("");
+		int[] sum = new int[keyLength];
+		
+		for (int i = 0; i < keyLength; i++) {
+			for (int j = 1; j < 33; j++) {
+				sum[i]+=table[i][j];
+			}
+			System.out.println(sum[i]);
+		}
+		
+		for (int i = 0; i < keyLength; i++) {
+			int mx = 0;
+			for (int j = 1; j < 33; j++) {
+				
+				if(table[i][j] > table[i][mx]){
+					mx = j;
+				}
+			}
+			key.append((char)('ა'+mx));
+		}
+		
+		this.key = key.toString();
+		
+		return this.key;
+	}
+	
 }
