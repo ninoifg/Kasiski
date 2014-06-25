@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Main {
 
-	private static String FILE = "example1.txt";
+	private static String FILE = "./data/example1.txt";
 
 	public static void main(String[] args) throws IOException {
 		File file = new File(FILE);
