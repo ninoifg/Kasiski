@@ -8,11 +8,11 @@ import java.util.List;
 
 public class Main {
 
-	private static String FILE = "/data/ifg/test/example1.txt";
+	private static String FILE = "example1.txt";
 
 	public static void main(String[] args) throws IOException {
 		File file = new File(FILE);
-
+		System.out.println(file.getAbsolutePath());
 		KasiskiWorker kasiski = new KasiskiWorker(file);
 		kasiski.analize();
 		int [][] a = kasiski.buildTable();
