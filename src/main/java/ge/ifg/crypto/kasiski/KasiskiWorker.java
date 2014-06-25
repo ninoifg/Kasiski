@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
@@ -13,8 +17,8 @@ public class KasiskiWorker {
 
 	private String key = null;
 
-	private String additionalKey = null;
-	
+	private List<Map<Character, Double>> probKey = null;
+
 	private KeyLengthAnalyser analyser = new KeyLengthAnalyser();
 
 	private int keyLength;
@@ -32,6 +36,7 @@ public class KasiskiWorker {
 	public KasiskiWorker(String text) throws IOException {
 		this.text = text;
 		analyser = new KeyLengthAnalyser();
+		probKey = new ArrayList<>();
 	}
 
 	public void analize() {
@@ -54,37 +59,52 @@ public class KasiskiWorker {
 	public int[][] buildTable() {
 		table = new int[keyLength][33];
 		for (int i = 0; i < text.length(); i++) {
-			table[i % keyLength][text.charAt(i)-'ა']++;
+			table[i % keyLength][text.charAt(i) - 'ა']++;
 		}
 		return table;
 	}
-	
+
 	public String findKey() {
-		
+
 		StringBuilder key = new StringBuilder("");
-		int[] sum = new int[keyLength];
-		
-		for (int i = 0; i < keyLength; i++) {
-			for (int j = 1; j < 33; j++) {
-				sum[i]+=table[i][j];
-			}
-			System.out.println(sum[i]);
-		}
-		
+
 		for (int i = 0; i < keyLength; i++) {
 			int mx = 0;
 			for (int j = 1; j < 33; j++) {
-				
-				if(table[i][j] > table[i][mx]){
+
+				if (table[i][j] > table[i][mx]) {
 					mx = j;
 				}
 			}
-			key.append((char)('ა'+mx));
+			key.append((char) ('ა' + mx));
 		}
-		
+
 		this.key = key.toString();
-		
+
 		return this.key;
 	}
-	
+
+	public List<Map<Character, Double>> probKey() {
+		int[] sum = new int[keyLength];
+
+		for (int i = 0; i < keyLength; i++) {
+			for (int j = 1; j < 33; j++) {
+				sum[i] += table[i][j];
+			}
+		}
+
+		for (int i = 0; i < keyLength; i++) {
+			Map<Character, Double> help = new HashMap<>();
+			for (int j = 0; j < 33; j++) {
+				double p = table[i][j] * 100. / sum[i];
+				
+				if(p > 12.){
+					help.put((char) ('ა' + j), p);
+				}
+			}
+			probKey.add(help);
+		}
+		return probKey;
+	}
+
 }

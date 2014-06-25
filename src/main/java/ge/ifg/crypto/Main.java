@@ -4,6 +4,7 @@ import ge.ifg.crypto.kasiski.KasiskiWorker;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
@@ -30,6 +31,11 @@ public class Main {
 //		}
 
 		System.out.println(kasiski.findKey());
+		List ll = kasiski.probKey();
+		for (Object object : ll) {
+
+			System.out.println(object);
+		}
 	}
 
 }
