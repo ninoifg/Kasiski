@@ -1,5 +1,8 @@
 package ge.ifg.crypto.kasiski;
 
+import ge.ifg.crypto.kasiski.keyLength.KeyLengthAnalyser;
+import ge.ifg.crypto.kasiski.keyLength.NGramAnalyser;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -56,7 +59,7 @@ public class KasiskiWorker {
 		keyLength = analyser.getKeyLength();
 	}
 
-	public int[][] buildTable() {
+	public int[][] buildAlphabetTable() {
 		table = new int[keyLength][33];
 		for (int i = 0; i < text.length(); i++) {
 			table[i % keyLength][text.charAt(i) - 'ა']++;

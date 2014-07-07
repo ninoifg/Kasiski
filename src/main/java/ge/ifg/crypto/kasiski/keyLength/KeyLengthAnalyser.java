@@ -1,4 +1,4 @@
-package ge.ifg.crypto.kasiski;
+package ge.ifg.crypto.kasiski.keyLength;
 
 import ge.ifg.crypto.utils.GeneralNGram;
 import ge.ifg.crypto.utils.Utils;
