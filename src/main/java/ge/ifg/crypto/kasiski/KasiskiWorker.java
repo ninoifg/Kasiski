@@ -110,4 +110,8 @@ public class KasiskiWorker {
 		return probKey;
 	}
 
+	
+	public void setKey(String key){
+		this.key = key;
+	}
 }
