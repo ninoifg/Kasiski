@@ -18,6 +18,8 @@ public class Main {
 		kasiski.findKey();
 		List ll = kasiski.probKey();
 		System.out.println(ll);
+		
+		System.out.println(kasiski.decode());
 	}
 
 }

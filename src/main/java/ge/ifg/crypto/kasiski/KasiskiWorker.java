@@ -1,5 +1,6 @@
 package ge.ifg.crypto.kasiski;
 
+import ge.ifg.crypto.decoder.Decoder;
 import ge.ifg.crypto.kasiski.keyLength.KeyLengthAnalyser;
 import ge.ifg.crypto.kasiski.keyLength.NGramAnalyser;
 
@@ -17,17 +18,14 @@ import org.apache.commons.io.IOUtils;
 public class KasiskiWorker {
 
 	private String text = null;
-
 	private String key = null;
-
 	private List<Map<Character, Double>> probKey = null;
-
 	private KeyLengthAnalyser analyser = new KeyLengthAnalyser();
-
 	private int keyLength;
-
 	int[][] table;
-
+	Decoder decoder;
+	
+	
 	public KasiskiWorker(File file) throws IOException {
 		this(new FileInputStream(file));
 	}
@@ -113,5 +111,12 @@ public class KasiskiWorker {
 	
 	public void setKey(String key){
 		this.key = key;
+	}
+
+	public String decode() {
+		if(decoder == null){
+			decoder = new PolyalphabeticDecoder();
+		}
+		return decoder.decode(text, "შიფრი");
 	}
 }
