@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.apache.commons.io.IOUtils;
 
@@ -22,10 +23,11 @@ public class KasiskiWorker {
 	private List<Map<Character, Double>> probKey = null;
 	private KeyLengthAnalyser analyser = new KeyLengthAnalyser();
 	private int keyLength;
-	int[][] table;
-	Decoder decoder;
-	
-	
+	private int[][] table;
+	private Decoder decoder;
+	private Scanner scanner;
+	private String encrepted;
+
 	public KasiskiWorker(File file) throws IOException {
 		this(new FileInputStream(file));
 	}
@@ -98,8 +100,8 @@ public class KasiskiWorker {
 			Map<Character, Double> help = new HashMap<>();
 			for (int j = 0; j < 33; j++) {
 				double p = table[i][j] * 100. / sum[i];
-				
-				if(p > 12.){
+
+				if (p > 12.) {
 					help.put((char) ('ა' + j), p);
 				}
 			}
@@ -108,15 +110,27 @@ public class KasiskiWorker {
 		return probKey;
 	}
 
-	
-	public void setKey(String key){
+	public void setKey(String key) {
 		this.key = key;
 	}
 
 	public String decode() {
-		if(decoder == null){
+		if (decoder == null) {
 			decoder = new PolyalphabeticDecoder();
 		}
-		return decoder.decode(text, "შიფრი");
+		this.encrepted = decoder.decode(text, key);
+		return this.encrepted;
+	}
+
+	public void choose(InputStream sysin) {
+		if (scanner == null)
+			scanner = new Scanner(sysin);
+		System.out.print("შემოიტანეთ გასაღები: ");
+		this.key = scanner.next();
+	}
+
+	public String showEncriptedText() {
+		System.out.println(this.encrepted);
+		return this.encrepted;
 	}
 }
