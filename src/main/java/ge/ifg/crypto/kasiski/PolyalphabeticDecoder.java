@@ -10,10 +10,10 @@ public class PolyalphabeticDecoder implements Decoder {
 		StringBuilder decoded = new StringBuilder("");
 		int keyLength = key.length();
 		for (int i = 0; i < text.length(); i++) {
-			int tmp = (int) text.charAt(i) + (int) key.charAt(i % keyLength)
-					- (int) 'ა';
-			if (tmp > 'ჰ')
-				tmp -= 33;
+			int tmp = (int) text.charAt(i) - (int) key.charAt(i % keyLength)
+					+ (int) 'ა';
+			if (tmp < 'ა')
+				tmp += 33;
 			decoded.append((char) tmp);
 		}
 
