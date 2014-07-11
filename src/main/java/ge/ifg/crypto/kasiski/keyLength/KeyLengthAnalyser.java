@@ -8,6 +8,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * 
+ * @author nkhoriashvili
+ * gasagebis sigrdzis damtvleli yvela ngrams shors itvlis USG-s
+ *
+ */
 public class KeyLengthAnalyser {
 
 	private List<GeneralNGram> list;

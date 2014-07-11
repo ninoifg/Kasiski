@@ -2,6 +2,13 @@ package ge.ifg.crypto.kasiski;
 
 import ge.ifg.crypto.decoder.Decoder;
 
+
+/**
+ * 
+ * @author nkhoriashvili
+ * polialfabeturis gamshifravi
+ *
+ */
 public class PolyalphabeticDecoder implements Decoder {
 
 	@Override

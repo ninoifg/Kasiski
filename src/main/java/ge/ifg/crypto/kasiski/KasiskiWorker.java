@@ -15,7 +15,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 import org.apache.commons.io.IOUtils;
-
+/**
+ * 
+ * @author nkoriashvili
+ * es aris kasiskis metodi.  poulobs gasagebis sigrdzes, gasagevs da gashifrafs teqst
+ *
+ */
 public class KasiskiWorker {
 
 	private String text = null;
@@ -41,6 +46,10 @@ public class KasiskiWorker {
 		probKey = new ArrayList<>();
 	}
 
+	/**
+	 *  aanalizebs text-s i sigrdzis tol ertmanetis tol stringebs shoris itvlis mandzils pulobs USG-s
+	 *  da shemdgom poulobs gasagebis sigrdzes yvela matganis USG-s 
+	 */
 	public void analize() {
 
 		if (this.text == null) {
@@ -58,6 +67,9 @@ public class KasiskiWorker {
 		keyLength = analyser.getKeyLength();
 	}
 
+	/**
+	 * aagebs cxrils da daitvlis simboloebs
+	 */
 	public int[][] buildAlphabetTable() {
 		table = new int[keyLength][33];
 		for (int i = 0; i < text.length(); i++) {
@@ -66,6 +78,9 @@ public class KasiskiWorker {
 		return table;
 	}
 
+	/**
+	 * gasagebis povna 
+	 */
 	public String findKey() {
 
 		StringBuilder key = new StringBuilder("");
@@ -86,6 +101,9 @@ public class KasiskiWorker {
 		return this.key;
 	}
 
+	/**
+	 * savaraudo gasagebebi
+	 */
 	public List<Map<Character, Double>> probKey() {
 		int[] sum = new int[keyLength];
 
@@ -109,22 +127,32 @@ public class KasiskiWorker {
 		return probKey;
 	}
 
-	public void setKey(String key) {
+	
+	private void setKey(String key) {
 		this.key = key;
 	}
 
+	/**
+	 * gashivra
+	 */
 	public String decode(Decoder decoder) {
 		this.encrepted = decoder.decode(text, key);
 		return this.encrepted;
 	}
 
+	/**
+	 * gasagebis archeva 
+	 */
 	public void choose(InputStream sysin) {
 		if (scanner == null)
 			scanner = new Scanner(sysin);
 		System.out.print("შემოიტანეთ გასაღები: ");
-		this.key = scanner.next();
+		setKey(scanner.next());
 	}
 
+	/**
+	 * textis gamotana
+	 */
 	public String showEncriptedText() {
 		System.out.println(this.encrepted);
 		return this.encrepted;

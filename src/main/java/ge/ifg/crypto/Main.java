@@ -14,22 +14,22 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
-		File file = new File(FILE);
-		KasiskiWorker kasiski = new KasiskiWorker(file);
-		kasiski.analize();
-		kasiski.buildAlphabetTable();
-		kasiski.findKey();
-		List<Map<Character, Double>> ll = kasiski.probKey();
+		File file = new File(FILE);	//failis shemotana
+		KasiskiWorker kasiski = new KasiskiWorker(file); //kasistran samusha
+		kasiski.analize();	//gaanalizeba datvla gasagebis sigrdzis
+		kasiski.buildAlphabetTable(); // gasagebis sapovnelat cxrilis ageba
+		kasiski.findKey();//gasagebis povna
+		List<Map<Character, Double>> ll = kasiski.probKey(); //savaraudo gasagebebi
 		
 		for ( Map<Character, Double> map: ll) {
 			System.out.println(map);
 		}
 
-		kasiski.choose(System.in);
+		kasiski.choose(System.in); //archeva gasagebis
 		
-		kasiski.decode(new PolyalphabeticDecoder());
+		kasiski.decode(new PolyalphabeticDecoder()); //gashifvra
 		
-		kasiski.showEncriptedText();
+		kasiski.showEncriptedText(); //bechvda
 	}
 
 }

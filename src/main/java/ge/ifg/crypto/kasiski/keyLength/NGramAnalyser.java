@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * 
+ *	nGrami itvlis i-s sigrdzis ngramebs shoris mandzils
+ *
+ */
 public class NGramAnalyser {
 
 	Map<String, List<Integer>> map;
