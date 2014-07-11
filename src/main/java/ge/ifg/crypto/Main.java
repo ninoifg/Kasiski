@@ -1,6 +1,7 @@
 package ge.ifg.crypto;
 
 import ge.ifg.crypto.kasiski.KasiskiWorker;
+import ge.ifg.crypto.kasiski.PolyalphabeticDecoder;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class Main {
 
 		kasiski.choose(System.in);
 		
-		kasiski.decode();
+		kasiski.decode(new PolyalphabeticDecoder());
 		
 		kasiski.showEncriptedText();
 	}

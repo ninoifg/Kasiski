@@ -24,7 +24,6 @@ public class KasiskiWorker {
 	private KeyLengthAnalyser analyser = new KeyLengthAnalyser();
 	private int keyLength;
 	private int[][] table;
-	private Decoder decoder;
 	private Scanner scanner;
 	private String encrepted;
 
@@ -114,10 +113,7 @@ public class KasiskiWorker {
 		this.key = key;
 	}
 
-	public String decode() {
-		if (decoder == null) {
-			decoder = new PolyalphabeticDecoder();
-		}
+	public String decode(Decoder decoder) {
 		this.encrepted = decoder.decode(text, key);
 		return this.encrepted;
 	}
